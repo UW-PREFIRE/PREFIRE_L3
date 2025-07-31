@@ -1,0 +1,187 @@
+{
+"_JSON_COMMENTS_": {
+  "purpose": {"to_describe": "the metadata and form of a NetCDF-format file"},
+
+  "abbrev_widget_len": {
+       "units": "cubits",
+       "long_name": "abbreviated widget length",
+       "description": "an arbitrary example of a data variable",
+       "C_dimensions": ["atrack", "xtrack"],
+       "F_dimensions": ["xtrack", "atrack"],
+       "np_dtype": "float32", "fill_value": -9.999e3,
+       "compression": [4, true] },
+
+  "C_dimensions_are": { "for": "Python, C, C++, etc." },
+  "F_dimensions_are": { "for": "Fortran, MatLab, IDL, etc." },
+  "can_have_either": { "or_both_types": "of dimension definition" },
+  "for_an_unlimited_dimension": { "add_a_prefix_eg": "!U!time" },
+
+  "Global_Attributes": { "group": "can be empty or omitted" },
+  "xxxxx_Group_Attributes": { "group": "can omit/empty, xxxxx is group name" },
+  "eg_value_known_globalgroup_att": { "value": 3.14159 },
+  "eg_value_pending_globalgroup_att": { "value": "!to_be_set!" }
+},
+
+
+"Global_Attributes": {
+    "Format": {"value": "netCDF-4"},
+    "summary": {"value": "The PREFIRE Level 3 products provide gridded, sorted, and/or statistical representations of other PREFIRE data products."},
+    "full_versionID": {"value": "!to_be_set!"},
+    "archival_versionID": {"value": "!to_be_set!"},
+    "granule_ID": {"value": "!to_be_set!"},
+    "provenance": {"value": "!to_be_set!"},
+    "file_name": {"value": "!to_be_set!"},
+    "input_product_files": {"value": "!to_be_set!"},
+    "processing_algorithmID": {"value": "!to_be_set!"},
+    "processing_level": {"value": "3"},
+    "UTC_of_file_creation": {"value": "!to_be_set!"},
+    "spacecraft_ID": {"value": "!to_be_set!"},
+    "sensor_ID": {"value": "!to_be_set!"},
+    "ctime_coverage_start_s": {"value": "!to_be_set!"},
+    "ctime_coverage_end_s": {"value": "!to_be_set!"},
+    "UTC_coverage_start": {"value": "!to_be_set!"},
+    "UTC_coverage_end": {"value": "!to_be_set!"},
+    "additional_file_description": {"value": " "},
+    "netCDF_lib_version": {"value": "!to_be_set!"},
+    "orbit_sim_version": {"value": " "},
+    "SRF_NEdR_version": {"value": " "},
+    "is_this_a_final_product_file": {"value": "no"}
+},
+
+
+"Sfc-Sorted":{
+    "wavelength": {
+             "units": "micron",
+             "long_name": "wavelength",
+             "description": "center wavelength of each spectral channel, given by the SRF-weighted mean over wavelength",
+             "C_dimensions": ["xtrack", "spectral"],
+             "np_dtype": "float32", "fill_value": -9.999e3,
+             "compression": [4, true, "ndecplc_2"] },
+    "idealized_wavelength": {
+             "units": "micron",
+             "long_name": "idealized wavelength",
+             "description": "center wavelength of each spectral channel, in the idealized spectrometer grid",
+             "C_dimensions": ["xtrack", "spectral"],
+             "np_dtype": "float32", "fill_value": -9.999e3,
+             "compression": [4, true, "ndecplc_2"] },
+    "surface_type_for_sorting": {
+             "long_name": "surface type used for sorting",
+             "description": "merged surface type using coastline data, met analysis (and possibly satellite observations of) sea ice and snow cover",
+             "flag_values": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+             "flag_meanings": "[1] open water, [2] sea ice, [3] partial sea ice, [4] permanent land ice, [5] Antarctic ice shelf, [6] snow-covered land, [7] partial snow-covered land, [8] snow-free land, [9] coastal",
+             "C_dimensions": ["sfc_type"],
+             "np_dtype": "int8", "fill_value": -99,
+             "compression": [4, true] },
+    "latitude": {
+             "units": "degrees_north",
+             "long_name": "latitude",
+             "description": "latitude of grid cell center",
+             "C_dimensions": ["lat", "lon"],
+             "np_dtype": "float32", "fill_value": -9.999e3,
+             "compression": [4, true, "ndecplc_3"],
+             "standard_name": "latitude",
+             "valid_min": -9.0e1,
+             "valid_max": 9.0e1 },
+    "longitude": {
+             "units": "degrees_east",
+             "long_name": "longitude",
+             "description": "longitude of grid cell center",
+             "C_dimensions": ["lat", "lon"],
+             "np_dtype": "float32", "fill_value": -9.999e3,
+             "compression": [4, true, "ndecplc_3"],
+             "standard_name": "longitude",
+             "valid_min": -1.80e2,
+             "valid_max": 1.80e2 },
+    "emis_mean": {
+             "long_name": "mean surface emissivity",
+             "description": "mean surface emissivity per latitude/longitude grid cell, cross-track scene, and spectral channel -- sorted by surface type",
+             "C_dimensions": ["xtrack", "sfc_type", "lat", "lon", "spectral"],
+             "np_dtype": "float32", "fill_value": -9.999e3,
+             "compression": [4, true] },
+    "asc_emis_mean": {
+             "long_name": "ascending-pass mean surface emissivity",
+             "description": "(for ascending orbit pass only) mean surface emissivity per latitude/longitude grid cell, cross-track scene, and spectral channel -- sorted by surface type",
+             "C_dimensions": ["xtrack", "sfc_type", "lat", "lon", "spectral"],
+             "np_dtype": "float32", "fill_value": -9.999e3,
+             "compression": [4, true] },
+    "desc_emis_mean": {
+             "long_name": "descending-pass mean surface emissivity",
+             "description": "(for descending orbit pass only) mean surface emissivity per latitude/longitude grid cell, cross-track scene, and spectral channel -- sorted by surface type",
+             "C_dimensions": ["xtrack", "sfc_type", "lat", "lon", "spectral"],
+             "np_dtype": "float32", "fill_value": -9.999e3,
+             "compression": [4, true] },
+    "emis_stdev": {
+             "long_name": "emissivity standard deviation",
+             "description": "standard deviation of surface emissivity per latitude/longitude grid cell, cross-track scene, and spectral channel -- sorted by surface type",
+             "C_dimensions": ["xtrack", "sfc_type", "lat", "lon", "spectral"],
+             "np_dtype": "float32", "fill_value": -9.999e3,
+             "compression": [4, true] },
+    "asc_emis_stdev": {
+             "long_name": "ascending-pass emissivity standard deviation",
+             "description": "(for ascending orbit pass only) standard deviation of surface emissivity per latitude/longitude grid cell, cross-track scene, and spectral channel -- sorted by surface type",
+             "C_dimensions": ["xtrack", "sfc_type", "lat", "lon", "spectral"],
+             "np_dtype": "float32", "fill_value": -9.999e3,
+             "compression": [4, true] },
+    "desc_emis_stdev": {
+             "long_name": "descending-pass emissivity standard deviation",
+             "description": "(for descending orbit pass only) standard deviation of surface emissivity per latitude/longitude grid cell, cross-track scene, and spectral channel -- sorted by surface type",
+             "C_dimensions": ["xtrack", "sfc_type", "lat", "lon", "spectral"],
+             "np_dtype": "float32", "fill_value": -9.999e3,
+             "compression": [4, true] },
+    "count": {
+             "long_name": "emissivity count",
+             "description": "count of total emissivity observations per latitude/longitude grid cell, cross-track scene, and spectral channel -- sorted by surface type",
+             "C_dimensions": ["xtrack", "sfc_type", "lat", "lon", "spectral"],
+             "np_dtype": "int32", "fill_value": -9999,
+             "compression": [4, true] },
+    "asc_count": {
+        "long_name": "ascending-pass emissivity observation count",
+             "description": "(for ascending orbit pass only) count of total emissivity observations per latitude/longitude grid cell, cross-track scene, and spectral channel -- sorted by surface type",
+             "C_dimensions": ["xtrack", "sfc_type", "lat", "lon", "spectral"],
+             "np_dtype": "int32", "fill_value": -9999,
+             "compression": [4, true] },
+    "desc_count": {
+             "long_name": "descending-pass emissivity observation count",
+             "description": "(for descending orbit pass only) count of total emissivity observations per latitude/longitude grid cell, cross-track scene, and spectral channel -- sorted by surface type",
+             "C_dimensions": ["xtrack", "sfc_type", "lat", "lon", "spectral"],
+             "np_dtype": "int32", "fill_value": -9999,
+             "compression": [4, true] },
+    "emis_sum": {
+             "long_name": "emissivity sum",
+             "description": "sum of emissivity observations per latitude/longitude grid cell, cross-track scene, and spectral channel -- sorted by surface type",
+             "C_dimensions": ["xtrack", "sfc_type", "lat", "lon", "spectral"],
+             "np_dtype": "float32", "fill_value": -9.999e3,
+             "compression": [4, true] },
+    "asc_emis_sum": {
+             "long_name": "ascending-pass emissivity sum",
+             "description": "(for ascending orbit pass only) sum of emissivitity observations per latitude/longitude grid cell, cross-track scene, and spectral channel -- sorted by surface type",
+             "C_dimensions": ["xtrack", "sfc_type", "lat", "lon", "spectral"],
+             "np_dtype": "float32", "fill_value": -9.999e3,
+             "compression": [4, true] },
+    "desc_emis_sum": {
+             "long_name": "descending-pass emissivity sum",
+             "description": "(for descending orbit pass only) sum of emissivitity observations per latitude/longitude grid cell, cross-track scene, and spectral channel -- sorted by surface type",
+             "C_dimensions": ["xtrack", "sfc_type", "lat", "lon", "spectral"],
+             "np_dtype": "float32", "fill_value": -9.999e3,
+             "compression": [4, true] },
+    "emis_sumsquares": {
+             "long_name": "sum of squared emissivity",
+             "description": "sum of emissivity*emissivity per latitude/longitude grid cell, cross-track scene, and spectral channel -- sorted by surface type",
+             "C_dimensions": ["xtrack", "sfc_type", "lat", "lon", "spectral"],
+             "np_dtype": "float32", "fill_value": -9.999e3,
+             "compression": [4, true] },
+    "asc_emis_sumsquares": {
+             "long_name": "ascending-pass sum of squared emissivity",
+             "description": "(for ascending orbit pass only) sum of emissivity*emissivity per latitude/longitude grid cell, cross-track scene, and spectral channel -- sorted by surface type",
+             "C_dimensions": ["xtrack", "sfc_type", "lat", "lon", "spectral"],
+             "np_dtype": "float32", "fill_value": -9.999e3,
+             "compression": [4, true] },
+    "desc_emis_sumsquares": {
+             "long_name": "descending-pass sum of squared emissivity",
+             "description": "(for descending orbit pass only) sum of emissivity*emissivity per latitude/longitude grid cell, cross-track scene, and spectral channel -- sorted by surface type",
+             "C_dimensions": ["xtrack", "sfc_type", "lat", "lon", "spectral"],
+             "np_dtype": "float32", "fill_value": -9.999e3,
+             "compression": [4, true] }
+}
+}
+
