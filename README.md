@@ -25,7 +25,15 @@ conda activate for_PREFIRE_L3;
 conda install -c conda-forge numpy, scipy, netcdf4;
 ```
 
-The location of 'PREFIRE_PRD_GEN' and 'PREFIRE_tools' depends on the value of the user's PYTHONPATH and/or sys.path -- for example, one could simply add each of those git repositories' local root Python source code directory to PYTHONPATH. Operationally, however, this package uses symbolic links to those git repositories' local root Python source code directories (or full copies of the same) in the source/ directory.
+The location of 'PREFIRE_PRD_GEN' and 'PREFIRE_tools' depends on the value of the user's PYTHONPATH and/or sys.path -- for example, one could simply add each of those git repositories' local root Python source code directory to PYTHONPATH.
+
+Operationally, however, this package uses symbolic links to those git repositories' local root Python source code directories (or full copies of the same) in the source/ directory.  To use the symlink method (assuming that all PREFIRE code repositories are in the same parent directory, and that the PYTHONPATH environment variable is unset or empty):
+
+```
+cd source;
+ln -s ../../PREFIRE_PRD_GEN/source/PREFIRE_PRD_GEN PREFIRE_PRD_GEN;
+ln -s ../../PREFIRE_tools/source/python/PREFIRE_tools PREFIRE_tools;
+```
 
 ## Environment Variables
 
@@ -61,11 +69,11 @@ SPECTRAL_IDX_RANGE_0BI  :  coded frame (i.e., along-track segment) subset to pro
 
 # Running the test script(s)
 
-## Obtain and unpack ancillary and test data
+## Obtain and unpack any ancillary data
 
 None (for this version).
 
-### Prepare the test input and output directories:
+## Prepare the test input and output directories:
 
 `cd test;`
 
@@ -93,4 +101,4 @@ Edit `my-run.sh` as needed (e.g., change input file names)
 
 The output file(s) will be in `test/outputs/`
 
-## _The creation of this code was supported by NASA, as part of the PREFIRE (Polar Radiant Energy in the Far-InfraRed Experiment) CubeSat mission._
+### _The creation of this code was supported by NASA, as part of the PREFIRE (Polar Radiant Energy in the Far-InfraRed Experiment) CubeSat mission._
